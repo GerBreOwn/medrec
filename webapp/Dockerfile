@@ -20,5 +20,8 @@ ADD ./config/database-check.py /srv/config/database-check.py
 RUN adduser --no-create-home --disabled-login --group --system django
 RUN chown -R django:django /srv/starter
 
+RUN mkdir /medrecapp
+COPY . /medrecapp
+
 # Execute start script
 CMD ["./start.sh"]

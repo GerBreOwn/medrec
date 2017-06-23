@@ -15,7 +15,7 @@ services:
         restart: always
         image: postgres:9.6
         volumes:
-            - data:/var/lib/postgresql/data
+            - pgdata:/var/lib/postgresql/data
         env_file:
             - ./config/environment/development.env
 
@@ -39,7 +39,7 @@ services:
         build:
             context: webapp
         volumes:
-            - ./webapp/starter:/srv/starter
+            - ./webapp/medrec:/srv/medrec
             - static-files:/srv/static-files
         expose:
             - "8000"

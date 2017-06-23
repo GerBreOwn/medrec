@@ -15,7 +15,7 @@ services:
         restart: always
         image: postgres:9.6
         volumes:
-            - pgdata:/var/lib/postgresql/data
+            - pgdata:/var/lib/postgresql/pgdata
         env_file:
             - ./config/environment/development.env
 
@@ -49,6 +49,10 @@ services:
             - ./config/environment/development.env
 
 volumes:
+
+  pgdata:
+    external: true
+    
   data:
     external: true
 

@@ -5,28 +5,37 @@
 #####
 
 version: "3"
-
-volumes:
-    static-files:
-    
     
 services:
     db:
-        restart: always
         image: postgres:9.6
         volumes:
             - pgdata:/var/lib/postgresql/pgdata
         env_file:
             - ./config/environment/development.env
+        networks:
+          - medrec_medrec
+        deploy:
+          mode: replicated
+          replicas: 3
+          labels: [APP=MEDREC]
+          placement:
+            constraints: [node.role == manager]
+        #restart: always
+        restart_policy:
+          condition: on-failure
+          delay: 5s
+          max_attempts: 3
+          window: 120s
 
     webserver:
-        restart: always
-        build:
-            context: .
-            dockerfile: services/webserver/Dockerfile
-        ports:
-            - "80:80"
-            - "443:443"
+        #restart: always
+        #build:
+            #context: .
+            #dockerfile: services/webserver/Dockerfile
+        #ports:
+            #- "80:80"
+            #- "443:443"
         depends_on:
             - webapp
         volumes:
@@ -35,7 +44,7 @@ services:
             - ./config/environment/development.env
 
     webapp:
-        restart: always
+        #restart: always
         build:
             context: webapp
         volumes:
@@ -58,3 +67,5 @@ volumes:
 
   static-files:
     external: false
+
+    

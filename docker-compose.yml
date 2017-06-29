@@ -5,67 +5,51 @@
 #####
 
 version: "3"
-    
+
 services:
     db:
         image: postgres:9.6
         volumes:
             - pgdata:/var/lib/postgresql/pgdata
-        env_file:
-            - ./config/environment/development.env
         networks:
-          - medrec_medrec
+          - webnet
         deploy:
           mode: replicated
-          replicas: 3
-          labels: [APP=MEDREC]
+          replicas: 2
+          labels: [APP=MEDRECDB]
           placement:
             constraints: [node.role == manager]
-        #restart: always
-        restart_policy:
-          condition: on-failure
-          delay: 5s
-          max_attempts: 3
-          window: 120s
-
     webserver:
-        #restart: always
-        #build:
-            #context: .
-            #dockerfile: services/webserver/Dockerfile
-        #ports:
-            #- "80:80"
-            #- "443:443"
         depends_on:
             - webapp
         volumes:
             - static-files:/srv/static-files
-        env_file:
-            - ./config/environment/development.env
-
+        deploy:
+          mode: replicated
+          replicas: 3
+          labels: [APP=MEDRECSERV]
+          placement:
+            constraints: [node.role == manager]
     webapp:
-        #restart: always
-        build:
-            context: webapp
+        image: gerbreown/medrec:latest
         volumes:
             - ./webapp/medrec:/srv/medrec
             - static-files:/srv/static-files
-        expose:
-            - "8000"
         depends_on:
             - db
-        env_file:
-            - ./config/environment/development.env
-
+        deploy:
+          mode: replicated
+          replicas: 2
+          labels: [APP=MEDRECAPP]
+          placement:
+            constraints: [node.role == manager]      
 volumes:
-
   pgdata:
     external: true
-    
   data:
     external: true
-
   static-files:
     external: false
-
+networks:
+   webnet:
     

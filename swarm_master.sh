@@ -18,6 +18,7 @@ echo "Swarm master IP: ${SWARM_MASTER}"
 sleep 10
  
 # start Docker registry mirror
+docker rm --force $(docker ps -q --filter "v2_mirror") > /dev/null 2>&1
 docker run -d --restart=always -p 4000:5000 --name v2_mirror \
   -v $PWD/rdata:/var/lib/registry \
   registry:latest
@@ -46,6 +47,7 @@ docker node ls
  
 # echo swarm visualizer
 printf "\nLocal Swarm Visualizer\n===================\n"
+docker rm --force $(docker ps -q --filter "name=swarm_visualizer") > /dev/null 2>&1
 docker run -it -d --name swarm_visualizer \
   -p 8000:8080 -e HOST=localhost \
   -v /var/run/docker.sock:/var/run/docker.sock \

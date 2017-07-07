@@ -21,7 +21,6 @@ services:
             constraints: [node.role == manager]
     webserver:
         image: nginx
-        
         depends_on:
             - webapp
         volumes:

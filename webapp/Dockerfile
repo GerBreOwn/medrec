@@ -1,5 +1,9 @@
 FROM python:3.6
 
+=======
+# Add code
+ADD ./medrec /srv/medrec
+
 # Install application requirements
 ADD ./config/requirements.txt /srv/medrec/
 RUN pip3 install -r /srv/medrec/requirements.txt

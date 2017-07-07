@@ -8,18 +8,20 @@ version: "3"
 
 services:
     db:
-        image: postgres:9.6
+        image: jgiannuzzi/postgresql-bdr
         volumes:
             - pgdata:/var/lib/postgresql/pgdata
         networks:
           - webnet
         deploy:
           mode: replicated
-          replicas: 2
+          replicas: 4
           labels: [APP=MEDRECDB]
           placement:
             constraints: [node.role == manager]
     webserver:
+        image: nginx
+        
         depends_on:
             - webapp
         volumes:

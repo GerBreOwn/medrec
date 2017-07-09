@@ -6,11 +6,14 @@ services:
     image: portainer/portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - port-data:/var/lib/portainer/data
     ports:
       - 9000:9000
     deploy:
       placement:
         constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
 
   viz:
     image: clarenceb/visualizer
@@ -19,5 +22,26 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+        restart_policy:
+          condition: on-failure
     ports:
       - 9090:8080
+
+  redmine:
+     image: redmine
+     deploy:
+       placement:
+         constraints: [node.role == manager]
+       restart_policy:
+         condition: on-failure
+
+  gitlab:
+    image: gitlab/gitlab-ce
+    deploy:
+       placement:
+         constraints: [node.role == manager]
+       
+
+volumes:
+  port-data:
+    external: true

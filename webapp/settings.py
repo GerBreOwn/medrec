@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'patient',
     'visit',
     'doctor',
-    
+    'versatileimagefield',
 ]
 
 MIDDLEWARE = [

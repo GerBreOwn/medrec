@@ -1,5 +1,0 @@
-django
-uwsgi
-psycopg2
-reportlab
-django-admin-tools

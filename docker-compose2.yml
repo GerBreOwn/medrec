@@ -3,7 +3,7 @@ version: '3'
 services:
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - port-data:/var/lib/portainer/data
@@ -12,18 +12,15 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-      restart_policy:
-        condition: on-failure
-
-  viz:
+        
+  visualizer:
     image: clarenceb/visualizer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
       placement:
         constraints: [node.role == manager]
-        restart_policy:
-          condition: on-failure
+        
     ports:
       - 9090:8080
 
@@ -32,8 +29,7 @@ services:
      deploy:
        placement:
          constraints: [node.role == manager]
-       restart_policy:
-         condition: on-failure
+       
 
   gitlab:
     image: gitlab/gitlab-ce

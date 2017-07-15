@@ -4,11 +4,11 @@
 # For documentation see: https://docs.docker.com/compose/yml/
 #####
 
-version: "3"
+version: "3.3"
 
 services:
     db:
-        image: jgiannuzzi/postgresql-bdr
+        image: markrowsoft/postgresql-bdr
         volumes:
             - pgdata:/var/lib/postgresql/pgdata
         networks:
@@ -19,6 +19,7 @@ services:
           labels: [APP=MEDRECDB]
           placement:
             constraints: [node.role == manager]
+            
     webserver:
         image: nginx
         depends_on:
@@ -31,6 +32,7 @@ services:
           labels: [APP=MEDRECSERV]
           placement:
             constraints: [node.role == manager]
+            
     webapp:
         image: gerbreown/medrec:latest
         volumes:

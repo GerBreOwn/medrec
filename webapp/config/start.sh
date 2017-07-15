@@ -24,7 +24,8 @@ if [ "$PRODUCTION" == "true" ]; then
     # and mark them as applied without running them. (Django won’t check that the
     # table schema match your models, just that the right table names exist).
     echo "==> Django setup, executing: migrate"
-    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate --fake-initial
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py makemigrations
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate #--fake-initial
 
     # Django: collectstatic
     #
@@ -48,7 +49,9 @@ else
     # and mark them as applied without running them. (Django won’t check that the
     # table schema match your models, just that the right table names exist).
     echo "==> Django setup, executing: migrate"
-    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate --fake-initial
+    
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py makemigrations
+    python3 /srv/${DJANGO_PROJECT_NAME}/manage.py migrate #--fake-initial
 
     # Django: collectstatic
     echo "==> Django setup, executing: collectstatic"

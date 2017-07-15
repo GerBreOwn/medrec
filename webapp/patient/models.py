@@ -8,7 +8,7 @@ from django.apps import AppConfig
 import datetime
 from crum import get_current_user
 from django.contrib import admin
-
+from versatileimagefield import VersatileImageField
 
 class CommonInfo(models.Model):
 	is_active = models.BooleanField(default = True, editable = False)
@@ -60,7 +60,8 @@ class Patient(CommonInfo):
 	address = models.CharField(max_length=50, blank=True, null=True)
 	town = models.ForeignKey('Town',  blank=False, null=False)
 	date_of_birth = models.DateField(("Date of birth"), default=datetime.date.today)
-	pic = models.ImageField(blank=True, null=True)
+	#pic = models.ImageField(blank=True, null=True)
+	pat_pic = VersatileImageField('Pat_Pic', upload_to='images')
 	occupation = models.ForeignKey(Occupation, blank=True, null=True)
 	email = models.EmailField(blank=True, null=True)
 	

@@ -3,3 +3,4 @@ uwsgi
 psycopg2
 reportlab
 django-crum
+django-versatileimagefield

@@ -26,18 +26,39 @@ services:
             - webapp
         volumes:
             - static-files:/srv/static-files
+        env_file:
+            - ./config/environment/development.env
         deploy:
           mode: replicated
           replicas: 3
           labels: [APP=MEDRECSERV]
           placement:
             constraints: [node.role == manager]
+
+    #webserver:
+        #build:
+            #context: .
+            #dockerfile: services/webserver/Dockerfile
+        #ports:
+            #- "80:80"
+            #- "443:443"
+        #depends_on:
+            #- webapp
+        #volumes:
+            #- static-files:/srv/static-files
+        #env_file:
+            #- ./config/environment/development.env
+            
             
     webapp:
         image: gerbreown/medrec:latest
         volumes:
             - ./webapp/medrec:/srv/medrec
             - static-files:/srv/static-files
+        env_file:
+            - ./config/environment/development.env
+        #expose:
+            #- "8000"
         depends_on:
             - db
         deploy:
@@ -45,7 +66,21 @@ services:
           replicas: 2
           labels: [APP=MEDRECAPP]
           placement:
-            constraints: [node.role == manager]      
+            constraints: [node.role == manager]
+
+    #webapp:
+        #build:
+            #context: webapp
+        #volumes:
+            #- ./webapp/starter:/srv/starter
+            #- static-files:/srv/static-files
+        #expose:
+            #- "8000"
+        #depends_on:
+            #- db
+        #env_file:
+            #- ./config/environment/development.env
+               
 volumes:
   pgdata:
     external: true

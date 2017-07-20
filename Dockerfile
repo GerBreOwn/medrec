@@ -1,8 +1,5 @@
 FROM python:3.6
 
-# Add code
-# ADD ./starter /srv/starter
-
 # Install application requirements
 #ADD ./webapp/requirements.txt /srv/
 ADD ./webapp/ /srv/

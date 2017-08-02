@@ -52,8 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
-MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+#MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
+#MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 
 ROOT_URLCONF = 'medrec3.urls'
@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'medrec3.wsgi.application'
 DATABASES = {
 	'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'medrec3',
+        'NAME': 'medrec',
         'USER': 'gerald',
         'PASSWORD': 'CasC#373',
         'HOST': '127.0.0.1',

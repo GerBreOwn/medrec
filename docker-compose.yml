@@ -21,8 +21,11 @@ services:
             #constraints: [node.role == manager]
         container_name: pg01
             
-    webserver:
+    nginx:
         image: nginx:latest
+        container_name: ng01
+        ports:
+          - "8000:8000"
         depends_on:
             - web
         volumes:
@@ -37,28 +40,14 @@ services:
           #labels: [APP=MEDRECSERV]
           #placement:
             #constraints: [node.role == manager]
-
-    #webserver:
-        #build:
-            #context: .
-            #dockerfile: services/webserver/Dockerfile
-        #ports:
-            #- "80:80"
-            #- "443:443"
-        #depends_on:
-            #- webapp
-        #volumes:
-            #- static-files:/srv/static-files
-        #env_file:
-            #- ./config/environment/development.env
-            
-            
+    
     web:
         #image: gerbreown/medrec:latest
         build: .
         container_name: dg01
         command: bash -c "pyhon3 manage.py makemigrations && python manage.py migrate"
-        
+        depends_on:
+            - db
         volumes:
             #- ./webapp/medrec:/srv/medrec
             #- static-files:/srv/static-files
@@ -67,8 +56,7 @@ services:
             - ./config/environment/development.env
         expose:
             - "8000"
-        depends_on:
-            - db
+        
         #deploy:
           #mode: replicated
           #replicas: 2

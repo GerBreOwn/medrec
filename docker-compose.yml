@@ -13,27 +13,30 @@ services:
             - pgdata:/var/lib/postgresql/pgdata
         networks:
           - webnet
-        deploy:
-          mode: replicated
-          replicas: 4
-          labels: [APP=MEDRECDB]
-          placement:
-            constraints: [node.role == manager]
+        #deploy:
+          #mode: replicated
+          #replicas: 4
+          #labels: [APP=MEDRECDB]
+          #placement:
+            #constraints: [node.role == manager]
+        container_name: pg01
             
     webserver:
-        image: nginx
+        image: nginx:latest
         depends_on:
-            - webapp
+            - web
         volumes:
-            - static-files:/srv/static-files
+        #    - static-files:/srv/static-files
+             - ./src:/src
+             - ./config/nginx:/etc/nginx/conf.d
         env_file:
             - ./config/environment/development.env
-        deploy:
-          mode: replicated
-          replicas: 3
-          labels: [APP=MEDRECSERV]
-          placement:
-            constraints: [node.role == manager]
+        #deploy:
+          #mode: replicated
+          #replicas: 3
+          #labels: [APP=MEDRECSERV]
+          #placement:
+            #constraints: [node.role == manager]
 
     #webserver:
         #build:
@@ -50,23 +53,28 @@ services:
             #- ./config/environment/development.env
             
             
-    webapp:
-        image: gerbreown/medrec:latest
+    web:
+        #image: gerbreown/medrec:latest
+        build: .
+        container_name: dg01
+        command: bash -c "pyhon3 manage.py makemigrations && python manage.py migrate"
+        
         volumes:
-            - ./webapp/medrec:/srv/medrec
-            - static-files:/srv/static-files
+            #- ./webapp/medrec:/srv/medrec
+            #- static-files:/srv/static-files
+            - ./src:/src
         env_file:
             - ./config/environment/development.env
-        #expose:
-            #- "8000"
+        expose:
+            - "8000"
         depends_on:
             - db
-        deploy:
-          mode: replicated
-          replicas: 2
-          labels: [APP=MEDRECAPP]
-          placement:
-            constraints: [node.role == manager]
+        #deploy:
+          #mode: replicated
+          #replicas: 2
+          #labels: [APP=MEDRECAPP]
+          #placement:
+            #constraints: [node.role == manager]
 
     #webapp:
         #build:

@@ -1,28 +1,31 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /config
-ADD /config/requirements.txt /config/
+#RUN mkdir /config
+#ADD /config/requirements.txt /config/
 
 # Install application requirements
-ADD ./src/ /src/
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/
 
-RUN pip3 install -r /config/requirements.txt
 
-WORKDIR /src
 
 # Add start script
-ADD ./src/start.sh /
+#ADD . /src/
+#ADD ./src/start.sh /
 
 # Add uWSGI config
-ADD ./config/django-uwsgi.ini /etc/uwsgi/django-uwsgi.ini
+#ADD ./config/django-uwsgi.ini /etc/uwsgi/django-uwsgi.ini
 
 # Add database check script
-#ADD ./config/database-check.py /srv/config/database-check.py
+#ADD ./config/database-check.py /src/config/database-check.py
 
 # Create django user, will own the Django app
-RUN adduser --no-create-home --disabled-login --group --system django
-RUN chown -R django:django /srv/
+#RUN adduser --no-create-home --disabled-login --group --system django
+#RUN chown -R django:django /src/
 
 # Execute start script
 #CMD ["./start.sh"]

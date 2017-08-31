@@ -37,20 +37,20 @@ class CommonInfo(models.Model):
 		#ordering = ['-counter',]
 		abstract = True
 
-class Occupation(CommonInfo): 
+class Occupation(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=50, blank = True, null = True, unique = True)
-			
+
 	class Meta:
 		ordering = ['-counter', 'name']
-	
+
 	def get_absolute_url(self):
 		return reverse('occup-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.name)
 
-class Patient(CommonInfo): 
+class Patient(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	last_name = models.CharField(max_length=25, db_index = True)
 	first_name = models.CharField(max_length=25, db_index = True)
@@ -64,28 +64,26 @@ class Patient(CommonInfo):
 	pat_pic = VersatileImageField('Pat_Pic', upload_to='images')
 	occupation = models.ForeignKey(Occupation, blank=True, null=True)
 	email = models.EmailField(blank=True, null=True)
-	
-	GENDER = (('F', 'Female'),
-		('M', 'Male'),
-		)
+
+	GENDER = (('F', 'Female'),('M', 'Male'),)
 	gender = models.CharField(max_length=1, choices=GENDER, blank=False, null=False, default = 'F', help_text = 'Select Gender')
-	
+
 	class Meta:
 		ordering = ['last_name', 'first_name']
-		
+
 	def get_absolute_url(self):
 		return reverse('patient-detail', args=[str(pat.id)])
 
 	def __str__(self):
 		return '%s, %s' % (self.last_name, self.first_name)
-	
-class Province(CommonInfo): 
+
+class Province(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=30, unique=True)
-	
+
 	#class Meta:
 		#ordering = ['-counter', 'province_name']
-		
+
 	def get_absolute_url(self):
 		return reverse('province-detail', args=[str(self.id)])
 
@@ -97,10 +95,10 @@ class Town(CommonInfo): #20
 	name = models.CharField(max_length=25, blank = False, null = False, unique = True)
 	zip = models.CharField(max_length=10, blank=True, null=True)
 	prov = models.ForeignKey(Province)
-		
+
 	class Meta:
 		ordering = ['name']
-		
+
 	def get_absolute_url(self):
 		return reverse('town-detail', args=[str(self.id)])
 

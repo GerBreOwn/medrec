@@ -36,7 +36,7 @@ class CommonInfo(models.Model): #1
 	def count_changes(self):
 		with connection.cursor() as cursor:
 			cursor.execute("update self set counter =+ 1 where self.id = %s", [self.pk])
-		
+
 
 	class Meta:
 		#ordering = ['-counter',]
@@ -50,7 +50,7 @@ class Biopsy(CommonInfo): #2
 	biopsy_result = models.ForeignKey('BiopsyResult', blank = True, null = True)
 	biopsy_text = models.TextField(blank = True, null = True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 	def get_absolute_url(self):
 		return reverse('biopsy-detail', args=[str(self.id)])
 
@@ -64,12 +64,12 @@ class Biopsy(CommonInfo): #2
 class BiopsyName(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	biopsy_name = models.CharField(max_length=25, blank = False, null = False, unique = True)
-	
+
 	class meta:
 		app_label = 'BiopsyName'
 		ordering = ['-counter', 'biopsy_name']
 		verbose_name = "biopsies"
-	
+
 	def get_absolute_url(self):
 		return reverse('biopsy-detail', args=[str(self.id)])
 
@@ -80,7 +80,7 @@ class BiopsyName(CommonInfo):
 class BiopsyResult(CommonInfo): #3
 	id = models.AutoField(primary_key=True)
 	biopsy_result = models.CharField(max_length=25, blank = False, null = False)
-		
+
 	class Meta:
 		ordering = ['-counter','biopsy_result']
 
@@ -96,11 +96,11 @@ class ComplaintName(CommonInfo):
 	#visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
 
 	def __str__(self):
-		return '%s' % (self.complaint_name)	
+		return '%s' % (self.complaint_name)
 
 	class meta:
 		ordering = ["complaint_name",]
-				
+
 	def get_absolute_url(self):
 		return reverse('complaintname-detail', args=[str(self.id)])
 
@@ -124,24 +124,24 @@ class Complaint(CommonInfo): #4
 class Dose(CommonInfo): #5
 	id = models.AutoField(primary_key=True)
 	dose_name = models.CharField(max_length=25, unique = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'dose_name']
-	
+
 	def get_absolute_url(self):
 		return reverse('dose-detail', args=[str(self.id)])
 
 	def __str__(self):
 		return '%s' % (self.dose_name)
-		
+
 #class Drawing(CommonInfo): #6
 	#id = models.AutoField(primary_key=True)
 	#patient = models.ForeignKey('Patient', models.DO_NOTHING, blank=True, null=True)
 	#drawing_name = models.BinaryField(blank=True, null=True, unique = True)
-	
+
 	##class Meta:
 		##ordering = ['-counter', 'patient', 'drawing_name']
-	
+
 	#def get_absolute_url(self):
 		#return reverse('drawing-detail', args=[str(self.id)])
 
@@ -152,7 +152,7 @@ class ExamName(CommonInfo):
 	id = models.AutoField(primary_key = True)
 	exam_name = models.CharField(max_length = 25, blank = True, null = True, unique = True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 class Exam(CommonInfo): #7
 	id = models.AutoField(primary_key = True)
 	exam_name = models.ForeignKey(ExamName, blank = True, null = True)
@@ -161,7 +161,7 @@ class Exam(CommonInfo): #7
 	exam_result = models.ForeignKey('ExamResult', blank=True, null=True)
 	exam_text = models.TextField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 	def get_absolute_url(self):
 		return reverse('exam-detail', args=[str(self.id)])
 
@@ -171,7 +171,7 @@ class Exam(CommonInfo): #7
 class ExamResult(CommonInfo): #8
 	id = models.AutoField(primary_key=True)
 	exam_result = models.CharField(max_length=25, blank=True, null=True, unique = True)
-	
+
 	def get_absolute_url(self):
 		return reverse('examresult-detail', args=[str(self.id)])
 
@@ -181,7 +181,7 @@ class ExamResult(CommonInfo): #8
 class ExamType(CommonInfo): #9
 	id = models.AutoField(primary_key=True)
 	exam_type = models.CharField(max_length=25, blank=True, null=True, unique = True)
-	
+
 	def get_absolute_url(self):
 		return reverse('examtype-detail', args=[str(self.id)])
 
@@ -192,10 +192,10 @@ class Finding(CommonInfo): #10
 	id = models.AutoField(primary_key=True)
 	finding_name = models.CharField(max_length=255, blank = True, null = True)#, unique = True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 	class Meta:
 		ordering = ['-counter', 'finding_name']
-	
+
 	def get_absolute_url(self):
 		return reverse('finding-detail', args=[str(self.id)])
 
@@ -208,14 +208,14 @@ class Hearing(CommonInfo):
 	hearing_result = models.ForeignKey('HearingResult', blank = True, null = True)
 	hearing_text = models.TextField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 class HearingTest(CommonInfo): #11
 	id = models.AutoField(primary_key=True)
 	hearing_name = models.CharField(max_length = 50, blank=True, null = True, unique = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'hearing_name']
-	
+
 	def get_absolute_url(self):
 		return reverse('hearing-detail', args=[str(self.id)])
 
@@ -225,7 +225,7 @@ class HearingTest(CommonInfo): #11
 class HearingResult(CommonInfo): #12
 	id = models.AutoField(primary_key=True)
 	hearing_result = models.CharField(max_length=25, unique = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'hearing_result']
 
@@ -235,7 +235,7 @@ class HearingResult(CommonInfo): #12
 class Location(CommonInfo): #13
 	id = models.AutoField(primary_key = True)
 	location = models.CharField(max_length = 25,blank=False, null=False, unique = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'location']
 
@@ -249,10 +249,10 @@ class Medicine(CommonInfo): #14
 	id = models.AutoField(primary_key=True)
 	brand_name = models.CharField(max_length=50, blank = True, null = True, unique=True)
 	generic_name = models.CharField(max_length = 50, blank = True, null = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'brand_name']
-	
+
 	def get_absolute_url(self):
 		return reverse('medication-detail', args=[str(self.id)])
 
@@ -268,20 +268,24 @@ class Prescription(CommonInfo):
 	prescription_reminder = models.ForeignKey('Reminder', blank=True, null=True)
 	medicine_quantity = models.IntegerField(blank=True, null=True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+	PPRINT = (('Y', 'Yes'), ('N', 'No'),)
+	pprint = models.CharField(max_length=1, choices=PPRINT, blank=False, null=False, default = 'Y', help_text = 'Print this prescription?')
+    PRE_PAPER = (('P', 'Plain Paper'), ('H', 'With Headers'),)
+    pre_paper = models.CharField(max_length=1, choices=PRE_PAPER, blank=True, null=True, help_text = 'Select paper type.')
+
 	def get_absolute_url(self):
 		return reverse('prescription-detail', args=[str(self.id)])
 
 	#def __str__(self):
 		#return '%s' % (self.medicine)
 
-class Reminder(CommonInfo): 
+class Reminder(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	prescription_reminder = models.CharField(max_length=50, blank = True, null = True, unique = True)
-	
+
 	class Meta:
 		ordering = ['-counter', 'prescription_reminder']
-	
+
 	def get_absolute_url(self):
 		return reverse('reminder-detail', args=[str(self.id)])
 
@@ -289,14 +293,14 @@ class Reminder(CommonInfo):
 		return '%s' % (self.prescription_reminder)
 
 
-class Treatment(CommonInfo): 
+class Treatment(CommonInfo):
 	id = models.AutoField(primary_key=True)
 	treatment_name = models.CharField(max_length=255, blank = True, null = True)
 	visit = models.ForeignKey('Visit', blank = True, null = True, editable = False)
-	
+
 	class Meta:
 		ordering = ['-counter', 'treatment_name']
-	
+
 	def get_absolute_url(self):
 		return reverse('treatment-detail', args=[str(self.id)])
 
@@ -307,7 +311,7 @@ class Visit(CommonInfo): #22
 	id = models.AutoField(primary_key=True)
 	visit_date = models.DateField(blank=False, null=False)
 	patient = models.ForeignKey(Patient, models.DO_NOTHING, blank=False, null=False)
-		
+
 	def get_absolute_url(self):
 		return reverse('visit-detail', args=[str(self.id)])
 

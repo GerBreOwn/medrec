@@ -37,56 +37,57 @@ WHERE
   visit_visit.id = 6;''')
 
         
-#fullname = "Gerald S. Brown"
-#age = "74"
-#sex = "M"
-#address = "Dumaguete City"
+fullname = "Brown, Gerald S"
+age = "74"
+sex = "M"
+address = "Dumaguete City"
+
 dt = date.today()
 
 c = canvas.Canvas("testform.pdf", pagesize=HALF_LETTER)
 c.setLineWidth(.3)
-c.setFont('Helvetica', 14)
+c.setFont('Helvetica-Bold', 14)
 
 c.setPageSize((396,612))
 
-c.drawString(40, 560, 'SIMON JOHN ERIC T. FLORES, M.D., DPBO-HNS')
+c.drawString(40, 576, 'SIMON JOHN ERIC T. FLORES, M.D., DPBO-HNS')
 
-c.setFont('Helvetica', 11)
-c.drawString(60,540, 'Diplomate - Ears, Nose, Throat - Head and Neck Surgery')
+c.setFont('Helvetica-Bold', 11)
+c.drawString(60,556, 'Diplomate - Ears, Nose, Throat - Head and Neck Surgery')
 
-c.drawString(36,510,'SUMC')
-c.setFont('Helvetica', 9)
-c.drawString(36,500,'Mon. - Fri.:   10:00 A.M. - 12:00 NN')
-c.drawString(36,490,'                      2:00 P.M. -  4:00 P.M.')
-c.drawString(36,480, 'Saturday  :   10:00 A.M. - 12:00 NN')
-c.drawString(36,470, 'Tel. No.    :   420-2217')
+c.drawString(36,526,'SUMC')
+c.setFont('Helvetica-Bold', 9)
+c.drawString(36,516,'Mon. - Fri.:   10:00 A.M. - 12:00 NN')
+c.drawString(36,506,'                      2:00 P.M. -  4:00 P.M.')
+c.drawString(36,496, 'Saturday  :   10:00 A.M. - 12:00 NN')
+c.drawString(36,486, 'Tel. No.    :   420-2217')
 
-c.setFont('Helvetica', 10)
-c.drawString(265,490,'HOSPITAL AFFILIATIONS:')
-c.drawString(265,480,'NOPH')
-c.drawString(265,470,'Holy Child Hospital')
+c.setFont('Helvetica-Bold', 10)
+c.drawString(265,506,'HOSPITAL AFFILIATIONS:')
+c.drawString(265,496,'NOPH')
+c.drawString(265,486,'Holy Child Hospital')
 
-c.line(35,463,378,463)
-c.line(35,461,378,461)
+c.line(35,463,378,479)
+c.line(35,461,378,477)
 
-c.setFont('Helvetica', 10)
-c.drawString(36,440,'Patient')
-c.drawString(74,442,'%s' % fullname)
-c.drawString(270,440,'Age')
-c.drawString(292,442,'%s' % age)
-c.drawString(330,440,'Sex')
-c.drawString(352,442,'%s' % sex)
+c.setFont('Helvetica-Bold', 10)
+c.drawString(36,456,'Patient')
+c.drawString(74,458,'%s' % fullname)
+c.drawString(270,456,'Age')
+c.drawString(292,458,'%s' % age)
+c.drawString(330,456,'Sex')
+c.drawString(352,458,'%s' % sex)
 
-c.drawString(36, 420, 'Address')
-c.drawString(77, 422, '%s' %  address )
-c.drawString(270, 420, 'Date')
-c.drawString(303, 422, '%s' % dt)
+c.drawString(36, 436, 'Address')
+c.drawString(77, 438, '%s' %  address )
+c.drawString(270, 436, 'Date')
+c.drawString(303, 438, '%s' % dt)
 
-c.line(72,440,266,440)
-c.line(290,440,325,440)
-c.line(350,440,378,440)
-c.line(72,420,266,420)
-c.line(300,420,378,420)
+c.line(72,456,266,456)
+c.line(290,456,325,456)
+c.line(350,456,378,456)
+c.line(72,436,266,436)
+c.line(300,436,378,436)
 
 # But first to put in the logo
 logo = Image("images.png")

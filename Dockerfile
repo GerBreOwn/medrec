@@ -1,31 +1,33 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
-#RUN mkdir /config
-#ADD /config/requirements.txt /config/
+#RUN pip3 install --upgrade pip
+RUN pip3 install pip-accel
+RUN pip-accel install uwsgi
 
 # Install application requirements
 RUN mkdir /code
 WORKDIR /code
-ADD requirements.txt /code/
-RUN pip install -r requirements.txt
-ADD . /code/
 
+COPY ./requirements.txt /code/
 
+#RUN pip3 install -r ./requirements.txt
+RUN pip-accel install -r ./requirements.txt
+COPY ./web/* /code/
 
-# Add start script
-#ADD . /src/
-#ADD ./src/start.sh /
+ENV DJANGO_ENV=prod
 
 # Add uWSGI config
 #ADD ./config/django-uwsgi.ini /etc/uwsgi/django-uwsgi.ini
 
 # Add database check script
-#ADD ./config/database-check.py /src/config/database-check.py
+ADD ./config/database-check.py /web/config/database-check.py
 
 # Create django user, will own the Django app
-#RUN adduser --no-create-home --disabled-login --group --system django
-#RUN chown -R django:django /src/
+RUN adduser --no-create-home --disabled-login --group --system django
+RUN chown -R django:django /web/
+
+EXPOSE 8000
 
 # Execute start script
-#CMD ["./start.sh"]
+CMD ["uwsgi","--ini", "./uwsgi.ini"]

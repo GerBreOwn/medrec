@@ -9,18 +9,20 @@ version: "3.3"
 services:
 
   db:
-     #image: markrowsoft/postgresql-bdr
+     image: markrowsoft/postgresql-bdr
      #image: polinux/postgres-bdr
-     image: safenetlabs/postgres-bdr
-
+     #image: safenetlabs/postgres-bdr
+     expose:
+       - 5432
      environment:
-       - POSTGRES_USER:'medrec'
-       - POSTGRES_PASSWORD:'medrec'
-       - POSTGRES_DB:'medrec'
-     ports:
-       - '5432'
+       - POSTGRES_USER=medrec
+       - POSTGRES_PASSWORD=medrec
+       - POSTGRES_DB=medrec
+     #ports:
+       #- '5432'
      volumes:
-         - pgdata:/var/lib/postgresql/pgdata
+         - pgdata:/var/lib/postgresql/data
+         - pgbackups:/pgbackups
      networks:
        - webnet
      #restart: always
@@ -48,25 +50,28 @@ services:
             #constraints: [node.role == manager]
 
   web:
-        #image: gerbreown/medrec:latest
+     #image: gerbreown/medrec-web:latest
      build: .
      container_name: dg01
-     #command: bash -c "/usr/bin/pyhon3 manage.py makemigrations && python manage.py migrate"
-     #restart: always
      depends_on:
          - db
-     volumes:
-         - .:/code
+     #ports:
+         #- "8000:8000"
+     #command: bash -c "/usr/bin/pyhon3 manage.py makemigrations && python manage.py migrate"
+     #restart: always
+     #volumes:
+         #- .:/code
          #- ./web/medrec:/srv/medrec
          #- static-files:/srv/static-files
          #- ./src:/src
-     env_file:
-         - ./config/environment/development.env
-     #ports:
-         #- "8000:8000"
+     #env_file:
+         #- ./config/environment/development.env
+
 
 volumes:
   pgdata:
+    external: true
+  pgbackups:
     external: true
   data:
     external: true

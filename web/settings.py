@@ -52,11 +52,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-#MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
+MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 #MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 
-ROOT_URLCONF = 'medrec3.urls'
+ROOT_URLCONF = 'medrec.urls'
 
 TEMPLATES = [
     {
@@ -86,7 +86,7 @@ TEMPLATES = [
 
 
 
-WSGI_APPLICATION = 'medrec3.wsgi.application'
+WSGI_APPLICATION = 'medrec.wsgi.application'
 
 
 DATABASES = {

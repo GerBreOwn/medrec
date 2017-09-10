@@ -1,31 +1,32 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
-#RUN pip3 install --upgrade pip
 RUN pip3 install pip-accel
+
 RUN pip-accel install uwsgi
 
 # Install application requirements
-RUN mkdir /code
-WORKDIR /code
+RUN mkdir /web
+WORKDIR /web
 
-COPY ./requirements.txt /code/
+COPY ./web/requirements.txt /web/
 
 #RUN pip3 install -r ./requirements.txt
 RUN pip-accel install -r ./requirements.txt
-COPY ./web/* /code/
+ADD /web/* /web/
+#COPY  ./web/* /web/
 
 ENV DJANGO_ENV=prod
 
 # Add uWSGI config
-#ADD ./config/django-uwsgi.ini /etc/uwsgi/django-uwsgi.ini
+ADD ./config/uwsgi.ini /etc/uwsgi/uwsgi.ini
 
 # Add database check script
 ADD ./config/database-check.py /web/config/database-check.py
 
 # Create django user, will own the Django app
-RUN adduser --no-create-home --disabled-login --group --system django
-RUN chown -R django:django /web/
+#RUN adduser --no-create-home --disabled-login --group --system django
+#RUN chown -R django:django /web/
 
 EXPOSE 8000
 

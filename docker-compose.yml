@@ -18,8 +18,7 @@ services:
        - POSTGRES_USER=medrec
        - POSTGRES_PASSWORD=medrec
        - POSTGRES_DB=medrec
-     #ports:
-       #- '5432'
+
      volumes:
          - pgdata:/var/lib/postgresql/data
          - pgbackups:/pgbackups
@@ -38,7 +37,7 @@ services:
          - web
      volumes:
         #    - static-files:/srv/static-files
-         - ./src:/src
+         #- ./src:/src
          - ./config/nginx:/etc/nginx.conf
      env_file:
          - ./config/environment/development.env

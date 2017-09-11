@@ -9,20 +9,21 @@ RUN pip-accel install uwsgi
 RUN mkdir /web
 WORKDIR /web
 
-COPY ./web/requirements.txt /web/
+COPY ./requirements.txt /web/
+#COPY ./settings.py /web/
 
 #RUN pip3 install -r ./requirements.txt
 RUN pip-accel install -r ./requirements.txt
-ADD /web/* /web/
-#COPY  ./web/* /web/
-
+#ADD /web/* /web/
+# COPY  ./web/* /web/
+COPY  ./ /web/
 ENV DJANGO_ENV=prod
 
 # Add uWSGI config
-ADD ./config/uwsgi.ini /etc/uwsgi/uwsgi.ini
+COPY ./config/uwsgi.ini /etc/uwsgi/uwsgi.ini
 
 # Add database check script
-ADD ./config/database-check.py /web/config/database-check.py
+COPY ./config/database-check.py /web/config/database-check.py
 
 # Create django user, will own the Django app
 #RUN adduser --no-create-home --disabled-login --group --system django

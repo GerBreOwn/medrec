@@ -8,7 +8,7 @@ from django.apps import AppConfig
 import datetime
 from crum import get_current_user
 from django.contrib import admin
-from versatileimagefield import VersatileImageField
+from versatileimagefield.fields import VersatileImageField
 
 class CommonInfo(models.Model):
 	is_active = models.BooleanField(default = True, editable = False)

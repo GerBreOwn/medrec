@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'web',
-    'patient',
-    'visit',
-    'doctor',
+   # 'patients',
+    # 'visit',
+   # 'doctor',
     'versatileimagefield',
 ]
 
@@ -62,7 +61,7 @@ ROOT_URLCONF = 'medrec.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         #'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,7 +95,8 @@ DATABASES = {
         'NAME': 'medrec',
         'USER': 'medrec',
         'PASSWORD': 'medrec',
-        'HOST': 'db',
+        #'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-ph'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Manila'
 
@@ -134,6 +134,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 

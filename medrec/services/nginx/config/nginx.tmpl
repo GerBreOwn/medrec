@@ -16,7 +16,7 @@ http {
     server_tokens off;
 
     upstream django {
-        server web:8000;
+     #   server web:8000;
     }
 
     server {
@@ -53,8 +53,10 @@ http {
         location ~ ~$           { access_log off; log_not_found off; deny all; }
 
         location / {
-            uwsgi_pass      django;
-            include         uwsgi_params;
+            # uwsgi_pass      django;
+            wsgi_pass	django;
+            #include         uwsgi_params;
+            include         wsgi_params;
         }
     }
 }

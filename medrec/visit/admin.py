@@ -22,7 +22,7 @@ def register_hidden_models(*model_names):
 
 register_hidden_models(mymodels)
 
-from .forms import BiopsyForm, ComplaintForm, ExamForm
+#from .forms import BiopsyForm, ComplaintForm, ExamForm
 
 #class HiddenModelAdmin(admin.ModelAdmin):
     #def get_model_perms(self, *args, **kwargs):
@@ -34,29 +34,29 @@ class BiopsyAdminInline(admin.TabularInline):
 	model = Biopsy
 	classes = ['collapse']
 	extra = 1
-	
+
 class ComplaintAdminInline(admin.TabularInline):
 	model = Complaint
 	extra = 1
-	
+
 class ExamAdminInline(admin.TabularInline):
 	model = Exam
 	classes = ['collapse']
 	extra = 1
-	
+
 #class FindingAdminInline(admin.TabularInline):
 	#model = Finding
 	#extra = 1
-	
+
 class HearingAdminInline(admin.TabularInline):
 	model = Hearing
 	classes = ['collapse']
 	extra = 1
-	
+
 class PrescriptionAdminInline(admin.TabularInline):
 	model = Prescription
 	extra = 1
-	
+
 
 @admin.register(Visit)
 class VisitInstanceAdmin(admin.ModelAdmin):
@@ -69,4 +69,4 @@ class VisitInstanceAdmin(admin.ModelAdmin):
 	view_on_site = False
 
 	inlines = (ComplaintAdminInline, PrescriptionAdminInline, BiopsyAdminInline, HearingAdminInline, ExamAdminInline, )
-	
+

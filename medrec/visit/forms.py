@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import Widget
-import floppyforms as fforms
+#import floppyforms as fforms
 
-class PrescriptionForm(fforms.Form):
-	dr_name = fforms.CharField()
-	
+#class PrescriptionForm(fforms.Form):
+	#dr_name = fforms.CharField()
+
 
 class BiopsyForm(forms.ModelForm):
 	class Meta:

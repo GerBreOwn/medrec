@@ -6,7 +6,7 @@ admin.site.site_header = 'Medical Records Administration'
 
 # Register your models here.
 
-from .models import  Patient, Province, Town, Occupation 
+from .models import  Patient, Province, Town, Occupation
 
 mymodels = [Province, Town, Occupation]
 
@@ -30,4 +30,4 @@ class Patient(admin.ModelAdmin):
 	list_display = ('last_name', 'first_name', 'middle_initial', 'date_of_birth', 'contact_num', 'address', 'town','gender', 'email', 'occupation')
 	fields = [('last_name', 'first_name', 'middle_initial'),('gender','date_of_birth'), ('contact_num', 'address', 'town'), ('email', 'occupation')]
 	search_fields = ['last_name', 'first_name']
-	
+

@@ -1,0 +1,20 @@
+POSTGRES_USER=medrec
+POSTGRES_PASSWORD=medrec
+POSTGRES_DB=medrec
+APP_SECRET_KEY="zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0d$ay"
+PG_TRUST_LOCALNET=true
+
+#- DEBUG=false
+
+    #- DB_USER=
+    #- DB_PASS=
+    #- DB_NAME=
+    #- DB_TEMPLATE=
+
+    #- DB_EXTENSION=
+
+    #- REPLICATION_MODE=
+    #- REPLICATION_USER=
+    #- REPLICATION_PASS=
+#- REPLICATION_SSLMODE=
+

@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mr@#_czy8j^&h%p7-7&h#ggq!9e1z0(ysp8s1w7_@pgi3d7kix'
+SECRET_KEY = 'zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0d$ay'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.18.0.3']
 
 
 # Application definition
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-   # 'patients',
-    # 'visit',
-   # 'doctor',
+    'patient',
+    'visit',
+    'doctor',
     'versatileimagefield',
 ]
 
@@ -53,8 +53,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
-#MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-
 
 ROOT_URLCONF = 'medrec.urls'
 
@@ -95,8 +93,8 @@ DATABASES = {
         'NAME': 'medrec',
         'USER': 'medrec',
         'PASSWORD': 'medrec',
-        #'HOST': 'db',
-        'HOST': 'localhost',
+        'HOST': 'postgres-master',
+        #'HOST': 'localhost',
         'PORT': '5432',
     }
 }

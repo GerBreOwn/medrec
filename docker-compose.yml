@@ -8,37 +8,55 @@ version: "3"
 
 services:
 
-  db:
+  postgres-master:
      image: markrowsoft/postgresql-bdr
      #image: polinux/postgres-bdr
      #image: safenetlabs/postgres-bdr
      #expose:
        #- 5432
-     environment:
-       - POSTGRES_USER=medrec
-       - POSTGRES_PASSWORD=medrec
-       - POSTGRES_DB=medrec
+     #environment:
+       #- POSTGRES_USER=medrec
+       #- POSTGRES_PASSWORD=medrec
+       #- POSTGRES_DB=medrec
      volumes:
          - pgdata:/var/lib/postgresql/pgdata
          - pgbackups:/var/lib/postgresql/pgbackups
+     env_file:
+       - env_file
+     deploy:
+        mode: replicated
+        replicas: 5
+        labels: [APP=MEDRECDB]
+        placement:
+            constraints: [node.role == manager]
 
-    #restart: always
-     #hostname: db.weave.local
-     #container_name: pg01
+  postgres-slave:
+     image: markrowsoft/postgresql-bdr
+     #image: polinux/postgres-bdr
+     #image: safenetlabs/postgres-bdr
+     #expose:
+       #- 5432
+     volumes:
+         - pgdata:/var/lib/postgresql/pgdata
+         - pgbackups:/var/lib/postgresql/pgbackups
+     env_file:
+       - env_file
+     deploy:
+        mode: replicated
+        replicas: 5
+        labels: [APP=MEDRECDB]
+        placement:
+            constraints: [node.role == manager]
 
   nginx:
      image: nginx:latest
-     #container_name: ng01
-     #ports:
-       #- "8000:8000"
-     #restart: always
      depends_on:
          - medrec
      volumes:
          - static-files:/srv/static-files
          - ./config/nginx:/etc/nginx.conf
-     env_file:
-         - ./medrec/config/environment/development.env
+     #env_file:
+         #- ./medrec/config/environment/development.env
      deploy:
         mode: replicated
         replicas: 3
@@ -48,17 +66,17 @@ services:
 
   medrec:
      image: gerbreown/medrec:latest
-     #build: .
-     #container_name: dg01
-     #expose:
-         #- "8000"
      depends_on:
-         - db
-     # command: bash -c "/usr/bin/pyhon3 manage.py makemigrations && python manage.py migrate"
-     #restart: always
-     #env_file:
-         #- ./config/environment/development.env
-
+         - postgres-master
+     #command: bash -c "/usr/bin/pyhon3 manage.py makemigrations && python manage.py migrate "
+     env_file:
+         env_file
+     deploy:
+        mode: replicated
+        replicas: 3
+        labels: [APP=MEDRECAPP]
+        placement:
+            constraints: [node.role == manager]
 
 volumes:
   pgdata:

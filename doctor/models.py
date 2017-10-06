@@ -1,3 +1,5 @@
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.types import DateTime
 from django.db import models
 from crum import get_current_user
 from django.contrib import admin
@@ -27,7 +29,7 @@ class CommonInfo(models.Model):
 	def count_changes(self):
 		with connection.cursor() as cursor:
 			cursor.execute("update self set counter =+ 1 where self.id = %s", [self.pk])
-	
+
 	class Meta:
 		ordering = ['-counter',]
 		abstract = True
@@ -40,7 +42,7 @@ class Doctor(CommonInfo):
 	dr_affil1 = models.ManyToManyField('Hospital',max_length = 25)#, blank = True, null = True)
 	dr_ptr_no = models.CharField(max_length = 25, blank = True, null = True)
 	dr_s2_no = models.CharField(max_length = 25, blank = True, null = True)
-	
+
 	def get_absolute_url(self):
 		return reverse('doctor-detail', args=[str(self.id)])
 
@@ -64,7 +66,7 @@ class Hospital(CommonInfo):
 	#hours_am = models.CharField(max_length = 20, blank = True, null = True)
 	#hours_pm = models.CharField(max_length = 20, blank = True, null = True)
 	#doctor = models.ForeignKey('Doctor')
-	
+
 	#def get_absolute_url(self):
 		#return reverse('office_hours-detail', args=[str(self.id)])
 

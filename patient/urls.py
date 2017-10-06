@@ -24,10 +24,10 @@ from sumedrec import views
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^admin_tools/', include('admin_tools.urls')),
-	url(r'^patients/$', views.PatientListView.as_view(), name='patients'),
-	url(r'^patients/(?P<pk>\d+)$', views.PatientDetailView.as_view(), name='patients-detail'),
-	
-	url(r'^visits/$', views.VisitListView.as_view(), name='visits'),  
+	url(r'^patient/$', views.PatientListView.as_view(), name='patients'),
+	url(r'^patient/(?P<pk>\d+)$', views.PatientDetailView.as_view(), name='patients-detail'),
+
+	url(r'^visits/$', views.VisitListView.as_view(), name='visits'),
     url(r'^visits/(?P<pk>\d+)$', views.VisitDetailView.as_view(), name='visits-detail'),
 ]
 

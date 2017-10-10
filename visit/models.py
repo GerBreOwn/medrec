@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.types import DateTime
+#from sqlalchemy import Column, Integer, String
+#from sqlalchemy.types import DateTime
 from django.db import models
 from django.db import connection
 from django.db.models import F

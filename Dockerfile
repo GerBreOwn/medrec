@@ -1,9 +1,10 @@
-FROM python:3.6
+FROM python:3.6.3
+
 MAINTAINER Gerald S. Brown <gbrown@gerbreown.com>
 
 ENV PYTHONUNBUFFERED 1
 
-RUN pip3 install pip-accel
+# RUN pip3 install pip-accel
 
 # Install application requirements
 RUN mkdir /medrec
@@ -12,7 +13,7 @@ WORKDIR /medrec
 COPY requirements.txt /medrec/
 COPY start.sh /start.sh
 
-RUN pip-accel install -r ./requirements.txt
+RUN  pip3 install -r ./requirements.txt
 
 COPY  . /medrec/
 

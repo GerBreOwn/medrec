@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.types import DateTime
+#from sqlalchemy import Column, Integer, String
+#from sqlalchemy.types import DateTime
 from django.db import models
 from crum import get_current_user
 from django.contrib import admin

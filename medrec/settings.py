@@ -25,7 +25,7 @@ SECRET_KEY = 'zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0d$ay'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['172.18.0.3']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -60,7 +60,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        #'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
 				'django.contrib.auth.context_processors.auth',

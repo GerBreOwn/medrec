@@ -19,7 +19,7 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from sumedrec import views
+#from sumedrec import views
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),

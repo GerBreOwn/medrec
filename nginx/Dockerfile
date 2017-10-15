@@ -1,6 +1,7 @@
 FROM nginx:latest
 
-COPY /etc/nginx/nginx.conf /etc/nginx/
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
 
 
 

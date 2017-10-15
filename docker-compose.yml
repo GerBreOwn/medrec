@@ -14,15 +14,19 @@ services:
      #image: safenetlabs/postgres-bdr
      #expose:
        #- 5432
-     #environment:
-       #- POSTGRES_USER=medrec
-       #- POSTGRES_PASSWORD=medrec
-       #- POSTGRES_DB=medrec
+     environment:
+       - POSTGRES_ROLE=medrec
+       - POSTGRES_USER=medrec
+       - POSTGRES_PASSWORD=medrec
+       - POSTGRES_DB=medrec
+       - APP_SECRET_KEY="zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0d$ay"
+       - PG_TRUST_LOCALNET=true
+
      volumes:
          - pgdata:/var/lib/postgresql/pgdata
          - pgbackups:/var/lib/postgresql/pgbackups
-     env_file:
-       - env_file
+     #env_file:
+       #- env_file
      deploy:
         mode: replicated
         replicas: 5
@@ -39,8 +43,14 @@ services:
      volumes:
          - pgdata:/var/lib/postgresql/pgdata
          - pgbackups:/var/lib/postgresql/pgbackups
-     env_file:
-       - env_file
+     environment:
+       - POSTGRES_ROLE=medrec
+       - POSTGRES_USER=medrec
+       - POSTGRES_PASSWORD=medrec
+       - POSTGRES_DB=medrec
+       - APP_SECRET_KEY="zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0d$ay"
+       - PG_TRUST_LOCALNET=true
+
      deploy:
         mode: replicated
         replicas: 5
@@ -49,7 +59,7 @@ services:
             constraints: [node.role == manager]
 
   nginx:
-     image: nginx:latest
+     image: gerbreown/nginx
      depends_on:
          - medrec
      volumes:

@@ -20,10 +20,10 @@ COPY  . /medrec/
 # ENV DJANGO_ENV=prod
 
 # Create django user, will own the Django app
-#RUN adduser --no-create-home --disabled-login --group --system django
-#RUN chown -R django:django /medrec/
+RUN adduser --no-create-home --disabled-login --group --system django
+RUN chown -R django:django /medrec/
 
-EXPOSE 8000
+EXPOSE 80:8000
 
 # Execute start script
 CMD ["/start.sh"]

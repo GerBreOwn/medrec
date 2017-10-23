@@ -3,6 +3,7 @@ FROM markrowsoft/postgresql-bdr
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 COPY pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf  
+
 RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
 
 USER postgres

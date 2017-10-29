@@ -92,8 +92,7 @@ DATABASES = {
         'NAME': 'medrec',
         'USER': 'medrec',
         'PASSWORD': 'medrec',
-        'HOST': 'postgres-master',
-        #'HOST': 'localhost',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

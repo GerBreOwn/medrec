@@ -8,68 +8,77 @@ version: "3"
 
 services:
 
-  postgres-master:
+  postgres-bdr:
+    #restart: always
     #image: markrowsoft/postgresql-bdr
-     #image: polinux/postgres-bdr
-     image: safenetlabs/postgres-bdr
-    environment:
-        - POSTGRES_ROLE=medrec
-        - POSTGRES_USER=medrec
-        - POSTGRES_PASSWORD=medrec
-        - POSTGRES_DB=medrec
-        - APP_SECRET_KEY="zc_@l(+kgfrg!#*z^2zive^y@24#h#@6u^w^c*ux#x9fv0day"
-        - PG_TRUST_LOCALNET=true
-
-    ports:
-        - 5432:5432
-    volumes:
-        - pgdata:/var/lib/postgresql/pgdata
-        - pgbackups:/var/lib/postgresql/pgbackups
+    image: gerbreown/postgresql-bdr:latest
 
     networks:
-       - medrec_default
+      - medrec_default
+    
+    environment:
+      - DEBUG=false
 
+      - DB_USER=medrec
+      - DB_PASS=medrec
+      - DB_NAME=medrec
+   
+      - DB_EXTENSION=pg_trgm
+      - PG_TRUST_LOCALNET=true
+      - PGDATA=/var/lib/postgresql/data
+    
+   # - REPLICATION_MODE=
+      - REPLICATION_USER=medrec-replicate
+      - REPLICATION_PASS=medrec-replicate@
+      - REPLICATION_SSLMODE=prefered
+  
+    volumes:
+       - /srv/docker/postgresql:/var/lib/postgresql
+       - pgdata:/var/lib/postgresql/pgdata
+       - pgbackups:/var/lib/postgresql/pgbackups
+  
     deploy:
-        mode: replicated
-        replicas: 5
-        labels: [APP=MEDRECDB]
-        placement:
-            constraints: [node.role == manager]
-  nginx:
-    image: gerbreown/nginx
+      mode: replicated
+      replicas: 5
       
+      placement:
+          constraints: [node.role == manager]
+          
+              
+  nginx:
+    image: nginx:latest
+
+    networks:
+      - medrec_default
+            
     depends_on:
        - medrec
+           
     volumes:
        - static-files:/srv/static-files
        - ./config/nginx:/etc/nginx.conf
 
-    networks:
-       - medrec_default
-
     deploy:
       mode: replicated
       replicas: 2
-      labels: [APP=MEDRECSERV]
+      
       placement:
           constraints: [node.role == manager]
 
   medrec:
-    image: gerbreown/medrec:latest
+    image: gerbreown/medrec:01
+    networks:
+      - medrec_default
+    #expose:
+       #- 8000
 
     depends_on:
-       - postgres-master
-
-    env_file:
-       env_file
-
-    networks:
-       - medrec_default
+       - postgres-bdr
 
     deploy:
       mode: replicated
       replicas: 4
-      labels: [APP=MEDRECAPP]
+      
       placement:
           constraints: [node.role == manager]
 
@@ -80,8 +89,8 @@ volumes:
     external: true
   static-files:
     external: false
-
+    
 networks:
-  medrec_default:
-    driver: overlay
+    medrec_default:
+        external: true
 

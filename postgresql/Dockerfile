@@ -1,24 +1,43 @@
-FROM markrowsoft/postgresql-bdr
+FROM ubuntu:16.04
+MAINTAINER Gerald S. Brown gbrown@gerbreown.com
 
-RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
+ENV PG_APP_HOME="/etc/docker-postgresql"\
+    PG_VERSION=9.4 \
+    PG_USER=postgres \
+    PG_HOME=/var/lib/postgresql \
+    PG_RUNDIR=/usr/lib/postgresql/$PG_VERSION/bin \
+    PG_LOGDIR=/var/log/postgresql \
+    PG_CERTDIR=/etc/postgresql/certs \
+    PGDATA=/var/lib/postgresql/data
 
-COPY pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf  
+ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin 
 
-RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 855AF5C7B897656417FA73D65D941908AA7A6805
+RUN apt-get update
+RUN apt-get install -y wget vim locate sudo apt-utils
 
-USER postgres
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+ && echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
+ && echo 'deb http://packages.2ndquadrant.com/bdr/apt/ jessie-2ndquadrant main' > /etc/apt/sources.list.d/pgdg.list \
+ && apt-get update \
+ && apt-get install -y postgresql-common \
+ && sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y acl \
+     postgresql-bdr-${PG_VERSION} \
+     postgresql-bdr-client-${PG_VERSION} \
+     postgresql-bdr-contrib-${PG_VERSION} \
+     postgresql-bdr-${PG_VERSION}-bdr-plugin
+RUN cp -v /usr/share/postgresql/$PG_VERSION/postgresql.conf.sample /usr/share/postgresql/ 
 
-RUN /etc/init.d/postgresql start \
-  && psql --command "CREATE USER medrec WITH PASSWORD 'medrec';" \
-  && createdb -O medrec
+ENV PATH=/usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 
-USER root
-RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "listen_addresses='*'" >> /etc/postgresql/9.4/main/postgresql.conf
+COPY runtime/ ${PG_APP_HOME}/
+COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
 
-EXPOSE 5432
-
-VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
-
-#USER postgres
-#CMD ["/usr/lib/postgresql/9.4/bin/postgres", "-D", "/var/lib/postgresql/9.4/main", "-c", "config_file=/etc/postgresql/9.4/main/postgresql.conf"]
+EXPOSE 5432/tcp
+VOLUME ["${PG_HOME}", "${PG_RUNDIR}"]
+WORKDIR ${PG_HOME}
+ENTRYPOINT ["/sbin/entrypoint.sh"]
+CMD ["postgres"]

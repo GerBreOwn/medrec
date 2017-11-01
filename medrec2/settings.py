@@ -54,7 +54,7 @@ MIDDLEWARE = [
 ]
 MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
 
-ROOT_URLCONF = 'medrec.urls'
+ROOT_URLCONF = 'medrec1.urls'
 
 TEMPLATES = [
     {
@@ -83,8 +83,8 @@ TEMPLATES = [
 
 
 
-WSGI_APPLICATION = 'medrec.wsgi.application'
-
+#WSGI_APPLICATION = 'medrec1.wsgi.application'
+WSGI_APPLICATION = 'medrec1.wsgi'
 
 DATABASES = {
 	'default': {

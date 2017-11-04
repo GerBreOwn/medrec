@@ -82,9 +82,6 @@ TEMPLATES = [
     },
 ]
 
-
-
-#WSGI_APPLICATION = 'medrec1.wsgi.application'
 WSGI_APPLICATION = './medrec.wsgi'
 
 DATABASES = {

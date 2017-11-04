@@ -3,7 +3,7 @@ FROM python:3.6.3
 MAINTAINER Gerald S. Brown <gbrown@gerbreown.com>
 
 ENV PYTHONUNBUFFERED 1
-ENV MEDREC_SRC=medrec1
+ENV MEDREC_SRC=medrec
 ENV MEDREC_SRVHOME=/srv
 ENV MEDREC_SRVPROJ=/srv/medrec
 
@@ -23,6 +23,6 @@ EXPOSE 8000
 
 WORKDIR $MEDREC_SRVPROJ
 
-COPY ./medrec1/docker-entrypoint.sh /
+COPY ./medrec/docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

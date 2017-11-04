@@ -8,8 +8,8 @@ touch /srv/logs/access.log
 tail -n 0 -f /srv/logs/*.log &
 
 echo Starting Gunicorn
-exec gunicorn medrec1.wsgi \ #:application \
-        --name medrec1 \
+exec gunicorn medrec.wsgi \ #:application \
+        --name medrec \
         --bind 0.0.0.0:8000 \
         --workers 3 \
         --log-level=info \

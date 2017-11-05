@@ -18,10 +18,10 @@ COPY . $MEDREC_SRVPROJ
 
 RUN pip3 install -r $MEDREC_SRVPROJ/requirements.txt #11
 
-EXPOSE 8000 #12
+EXPOSE 8000 
 
-WORKDIR $MEDREC_SRVPROJ #13
+WORKDIR $MEDREC_SRVPROJ 
 
-COPY ./medrec/docker-entrypoint.sh /  #14
+#COPY ./medrec/docker-entrypoint.sh $MEDREC_SRVPROJ
 
-ENTRYPOINT ["/docker-entrypoint.sh"] #15
+ENTRYPOINT ["/docker-entrypoint.sh"] 

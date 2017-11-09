@@ -50,11 +50,7 @@ coverage.xml
 */__init__.py
 */migrations/*.*
 
-# Sphinx documentation
-docs/_build/
-
 # PyBuilder
 target/
 
-# Vim
-.ropeproject
+.env

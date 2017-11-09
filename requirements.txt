@@ -5,4 +5,5 @@ reportlab
 django-crum
 django-versatileimagefield
 django-avatar
+python-decouple
 

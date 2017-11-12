@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', casct=bool)
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS =config('ALLOWED_HOSTS', cast=Csv())
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'doctor',
     'versatileimagefield',
     'avatar',
+    'django.contrib.postgres',
+    'psqlextra',
 ]
 
 MIDDLEWARE = [
@@ -76,18 +78,20 @@ TEMPLATES = [
             'loaders': [
 				'django.template.loaders.filesystem.Loader',
 				'django.template.loaders.app_directories.Loader',
-				'admin_tools.template_loaders.Loader'
+			#	'admin_tools.template_loaders.Loader'
 
 			]
         },
     },
 ]
 
+# WSGI_APPLICATION = 'medrec.wsgi:application'
 WSGI_APPLICATION = 'medrec.wsgi'
 
 DATABASES = {
 	'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'psqlextra.backend',
         'NAME':  config('DB_NAME'),
         'USER':  config('DB_USER'),
         'PASSWORD':  config('DB_PASSWORD'),

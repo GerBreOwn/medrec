@@ -1,18 +1,19 @@
-#from sqlalchemy import Column, Integer, String
-#from sqlalchemy.types import DateTime
 from django.db import models
 from django.db import connection
 from django.db.models import F
 from django.db.models import signals
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.apps import AppConfig
 import datetime
+#from psqlextra.models import PostgresModel
+from psqlextra.manager import PostgresManager
 from crum import get_current_user
 from django.contrib import admin
 from versatileimagefield.fields import VersatileImageField
 
 class CommonInfo(models.Model):
+	objects = PostgresManager()
 	is_active = models.BooleanField(default = True, editable = False)
 	created_on = models.DateTimeField(auto_now_add = True, editable = False)
 	created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, related_name = "+")

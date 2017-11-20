@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+     url(r'^admin/', include(admin.site.urls)),
 	# url(r'^$', views.index, name='index'),
 	# url(r'^admin_tools/', include('admin_tools.urls')),
 	# url(r'^patient/$', views.PatientListView.as_view(), name='patients'),

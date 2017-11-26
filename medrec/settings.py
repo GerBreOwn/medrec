@@ -26,8 +26,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS =config('ALLOWED_HOSTS', cast=Csv())
-
+#ALLOWED_HOSTS =config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = "*"
 
 # Application definition
 
@@ -90,8 +90,8 @@ WSGI_APPLICATION = 'medrec.wsgi'
 
 DATABASES = {
 	'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'ENGINE': 'psqlextra.backend',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg',
+        'ENGINE': 'psqlextra.backend',
         'NAME':  config('DB_NAME'),
         'USER':  config('DB_USER'),
         'PASSWORD':  config('DB_PASSWORD'),

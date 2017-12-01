@@ -1,4 +1,6 @@
-.git
-.gitignore
-Dockerfile
-docker-compose.yml
+*.swp
+*.swo
+*.pyc
+config.ini
+supervisord.log
+supervisord.pid

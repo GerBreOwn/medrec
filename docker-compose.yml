@@ -26,7 +26,7 @@ services:
       - REPLICATION_PASS=medrec-replicate@
       - REPLICATION_SSLMODE=prefered
     volumes:
-       - /srv/medrec/postgresql:/var/lib/postgresql
+       - /medrec/postgresql:/var/lib/postgresql/data
        - pgdata:/var/lib/postgresql/pgdata
        - pgbackups:/var/lib/postgresql/pgbackups
     ports:
@@ -60,12 +60,12 @@ services:
       placement:
           constraints: [node.role == manager]
 
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    volumes:
-      - redisdata:/data
+  #redis:
+    #image: redis:latest
+    #ports:
+      #- "6379:6379"
+    #volumes:
+      #- redisdata:/data
 
 volumes:
   pgdata:
@@ -74,8 +74,8 @@ volumes:
     external: true
   static-files:
     external: false
-  redisdata:
-    external: false
+  #redisdata:
+    #external: false
 
 networks:
     medrec_default:

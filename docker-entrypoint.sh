@@ -80,7 +80,7 @@ if [ "$1" = 'postgres' ]; then
 		fi
 	fi
 	
-	exec gosu postgres "$@"
+	#exec gosu postgres "$@"
 fi
 
-exec "$@"
+#exec "$@"

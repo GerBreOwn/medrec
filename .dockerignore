@@ -1,6 +1,7 @@
 *.swp
 *.swo
 *.pyc
+__pycache__.py
 config.ini
 supervisord.log
 supervisord.pid

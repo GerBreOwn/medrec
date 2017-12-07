@@ -4,6 +4,6 @@ psycopg2
 reportlab
 django-crum
 django-versatileimagefield
-django-avatar
+#django-avatar
 python-decouple
 django-postgres-extra

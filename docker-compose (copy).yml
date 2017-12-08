@@ -26,8 +26,7 @@ services:
       - REPLICATION_PASS=medrec-replicate@
       - REPLICATION_SSLMODE=prefered
     volumes:
-       - /srv/medrec/postgresql:/var/lib/postgresql
-      # - var/lib/postgresql:/srv/medrec/postgresql
+       - /medrec/postgresql:/var/lib/postgresql/data
        - pgdata:/var/lib/postgresql/pgdata
        - pgbackups:/var/lib/postgresql/pgbackups
     ports:
@@ -37,7 +36,6 @@ services:
       replicas: 4
       placement:
           constraints: [node.role == manager]
-
 
   nginx:
     image: nginx:latest

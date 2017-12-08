@@ -13,8 +13,8 @@ COPY ./medrec/requirements.txt  $MEDREC_SRVPROJ
 RUN pip install -r requirements.txt
 COPY  ./medrec/* $MEDREC_SRVPROJ
 RUN rm -rf srv
-VOLUME /var/lib/postgresql/data
+#VOLUME /var/lib/postgresql/data
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 5432
+EXPOSE 8000
 CMD ["postgres"]

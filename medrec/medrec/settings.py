@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'visit',
     'doctor',
     'versatileimagefield',
-    'avatar',
+   # 'avatar',
     'django.contrib.postgres',
     'psqlextra',
 ]

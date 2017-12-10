@@ -4,14 +4,14 @@
 # For documentation see: https://docs.docker.com/compose/yml/
 #####
 
-version: "3"
+version: "3.4"
 services:
   postgres-bdr:
      # image: postgres:latest
     #image: jgiannuzzi/postgres-bdr:latest
     #image: markrowsoft/postgresql-bdr
     #image: gerbreown/postgres-bdr:latest
-    image: safenetlabs/postgres-bdr
+    image: safenetlabs/postgres-bdr:latest
     networks:
       - medrec_default
     environment:
@@ -26,9 +26,8 @@ services:
       - REPLICATION_PASS=medrec-replicate@
       - REPLICATION_SSLMODE=prefered
     volumes:
-       - /srv/medrec/postgresql:/var/lib/postgresql
-      # - var/lib/postgresql:/srv/medrec/postgresql
-       - pgdata:/var/lib/postgresql/pgdata
+       - pgdata:/var/lib/postgresql/data
+       #- pgdata:/var/lib/postgresql/pgdata
        - pgbackups:/var/lib/postgresql/pgbackups
     ports:
        - 5432:5432
@@ -47,12 +46,19 @@ services:
     volumes:  
       - ./medrec.conf:/etc/nginx/conf.d/default.conf:ro
       - ./static:/usr/share/nginx/medrec/static
+     
+    deploy:
+       mode: replicated
+       replicas: 2
+       placement:
+          constraints: [node.role == manager] 
+     
 
   medrec:
     image: gerbreown/medrec:06
     networks:
       - medrec_default
-    command: bash -c "cd /media/gerald/NewMisc/MyProjects/medrec-top/medrec/medrec python3 manage.py makemigrations && python manage.py migrate && gunicorn medrec.wsgi -b 0.0.0.0:8000"
+    #command: bash -c "cd /media/gerald/NewMisc/MyProjects/medrec-top/medrec/medrec python3 manage.py makemigrations && python manage.py migrate && gunicorn medrec.wsgi -b 0.0.0.0:8000"
     
     depends_on:
        - postgres-bdr

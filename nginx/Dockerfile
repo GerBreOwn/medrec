@@ -1,3 +1,3 @@
 FROM nginx:latest
 
-ADD sites-enabled/ /etc/nginx/sites-enabled
+COPY /etc/nginx/nginx.conf  /etc/nginx/nginx.conf 

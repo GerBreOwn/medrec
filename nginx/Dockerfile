@@ -1,3 +1,5 @@
 FROM nginx:latest
 
-COPY /etc/nginx/nginx.conf  /etc/nginx/nginx.conf 
+COPY nginx.conf  /nginx.conf 
+
+EXPOSE: 80:80

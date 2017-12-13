@@ -12,22 +12,20 @@ services:
     #image: markrowsoft/postgresql-bdr
     #image: gerbreown/postgres-bdr:latest
     image: safenetlabs/postgres-bdr:latest
+    
     networks:
       - medrec_default
+    
     environment:
       - DB_USER=medrec
       - DB_PASS=medrec123
       - DB_NAME=medrec
-      - DB_EXTENSION=pg_trgm
       - PG_TRUST_LOCALNET=true
-      - PGDATA=/var/lib/postgresql/data
-   # - REPLICATION_MODE=
       - REPLICATION_USER=medrec-replicate
       - REPLICATION_PASS=medrec-replicate@
       - REPLICATION_SSLMODE=prefered
     volumes:
        - pgdata:/var/lib/postgresql/data
-       #- pgdata:/var/lib/postgresql/pgdata
        - pgbackups:/var/lib/postgresql/pgbackups
     ports:
        - 5432:5432
@@ -39,12 +37,12 @@ services:
 
 
   nginx:
-    image: nginx:latest
+    image: gerbreown/nginx:latest
     ports:
       - 80:80
     
     volumes:  
-      - ./medrec.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./static:/usr/share/nginx/medrec/static
      
     deploy:
@@ -58,8 +56,7 @@ services:
     image: gerbreown/medrec:06
     networks:
       - medrec_default
-    #command: bash -c "cd /media/gerald/NewMisc/MyProjects/medrec-top/medrec/medrec python3 manage.py makemigrations && python manage.py migrate && gunicorn medrec.wsgi -b 0.0.0.0:8000"
-    
+        
     depends_on:
        - postgres-bdr
        
@@ -71,9 +68,9 @@ services:
           
 volumes:
   pgdata:
-    external: true
+    external: false
   pgbackups:
-    external: true
+    external: false
   static-files:
     external: false
   

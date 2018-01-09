@@ -1,5 +1,6 @@
-FROM nginx:latest
+FROM nginx
 
-COPY nginx.conf  /nginx.conf 
+# COPY nginx.conf  /etc/nginx/nginx.conf 
+COPY nginx.conf /usr/share/nginx/html
 
-EXPOSE: 80:80
+#CMD 'nginx'

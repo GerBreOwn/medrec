@@ -1,10 +1,9 @@
 django
 gunicorn
 psycopg2
-reportlab
-django-crum
-django-versatileimagefield
-django-avatar
-python-decouple
-django-postgres-extra
-weasyprint
+#reportlab
+#django-crum
+#django-versatileimagefield
+#python-decouple
+#django-postgres-extra
+#weasyprint

@@ -1,5 +1,5 @@
 #! /bin/bash
-set -e
+#set -e
 
 touch /logs/gunicorn.log
 touch /logs/access.log

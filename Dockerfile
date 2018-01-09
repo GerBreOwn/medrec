@@ -12,9 +12,9 @@ VOLUME ["$MEDREC_SRVHOME/media/", "$MEDREC_SRVHOME/logs/"]
 COPY ./medrec/requirements.txt  $MEDREC_SRVPROJ
 RUN pip install -r requirements.txt
 COPY  ./medrec/* $MEDREC_SRVPROJ
-RUN rm -rf srv
+#RUN rm -rf srv
 VOLUME /var/lib/postgresql/data
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 8000
-CMD ["postgres"]
+# RUN rm /usr/local/lib/python3.6/site-packages/avatar/models.py
+# EXPOSE 8000

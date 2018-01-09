@@ -37,13 +37,14 @@ services:
 
 
   nginx:
-    image: gerbreown/nginx:latest
+    #image: gerbreown/nginx:latest
+    image: nginx:latest
     ports:
       - 80:80
     
-    volumes:  
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./static:/usr/share/nginx/medrec/static
+    #volumes:  
+      #- ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      #- ./static:/usr/share/nginx/medrec/static
      
     deploy:
        mode: replicated

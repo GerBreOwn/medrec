@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'medrec.wsgi'
 
 DATABASES = {
 	'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg',
         'ENGINE': 'psqlextra.backend',
         'NAME':  config('DB_NAME'),
         'USER':  config('DB_USER'),

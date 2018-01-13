@@ -27,8 +27,8 @@ services:
     volumes:
        - pgdata:/var/lib/postgresql/data
        - pgbackups:/var/lib/postgresql/pgbackups
-    ports:
-       - 5432:5432
+    #ports:
+       #- 5432:5432
     deploy:
       mode: replicated
       replicas: 4
@@ -54,7 +54,7 @@ services:
      
 
   medrec:
-    image: gerbreown/medrec:06
+    image: gerbreown/medrec:07
     networks:
       - medrec_default
         

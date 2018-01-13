@@ -1,7 +1,7 @@
 FROM python:3.6.3
 MAINTAINER Gerald S. Brown <gbrown@gerbreown.com>
 ENV PYTHONUNBUFFERED 1
-ENV MEDREC_SRC=/medrec/
+#ENV MEDREC_SRC=/medrec-top/
 ENV MEDREC_SRVHOME=/medrec/
 ENV MEDREC_SRVPROJ=/medrec/
 ENV DJANGO_ENV=prod
@@ -11,10 +11,10 @@ WORKDIR  $MEDREC_SRVPROJ
 VOLUME ["$MEDREC_SRVHOME/media/", "$MEDREC_SRVHOME/logs/"]
 COPY ./medrec/requirements.txt  $MEDREC_SRVPROJ
 RUN pip install -r requirements.txt
-COPY  ./medrec/* $MEDREC_SRVPROJ
+COPY ./medrec/* $MEDREC_SRVPROJ
 #RUN rm -rf srv
 VOLUME /var/lib/postgresql/data
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
-# RUN rm /usr/local/lib/python3.6/site-packages/avatar/models.py
+# RUN rm /usr/local/lib/python3.6/site-packages/avatar/*
 # EXPOSE 8000

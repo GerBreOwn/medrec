@@ -1,6 +1,23 @@
-FROM nginx
+FROM nginx:latest
 
-# COPY nginx.conf  /etc/nginx/nginx.conf 
-COPY nginx.conf /usr/share/nginx/html
+LABEL version="1.0"
 
-#CMD 'nginx'
+RUN apt-get update -q && \
+         apt-get dist-upgrade -y && \
+         apt-get install openssl && \
+         apt-get clean && \
+         apt-get autoclean
+
+ENV SRV_PATH /srv/www/html
+
+ARG PASSWORD=test         
+         
+RUN rm /etc/nginx/conf.d/default.conf
+RUN mkdir -p /srv/www/html && \
+         chown nginx:nginx $SRV_PATH
+
+RUN printf "user:$(openssl passwd -1 $PASSWORD)\n" >> $SRV_PATH/.htpasswd
+         
+ COPY nginx_main_site.conf /etc/nginx/conf.d/
+ COPY test.txt /srv/www/html/
+ 

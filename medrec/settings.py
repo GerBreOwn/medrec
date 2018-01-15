@@ -52,9 +52,9 @@ INSTALLED_APPS = [
     'patient',
     'visit',
     'doctor',
-    'versatileimagefield',
+    #'django-versatileimagefield',
     'django.contrib.postgres',
-    'psqlextra',
+    #'django-psqlextra',
 ]
 
 MIDDLEWARE = [

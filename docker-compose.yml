@@ -37,8 +37,8 @@ services:
 
 
   nginx:
-    #image: gerbreown/nginx:latest
-    image: nginx:latest
+    image: gerbreown/nginx:latest
+    #image: nginx:latest
     ports:
       - 80:80
     
@@ -63,7 +63,7 @@ services:
        
     deploy:
       mode: replicated
-      replicas: 4
+      replicas: 5
       placement:
           constraints: [node.role == manager]
           

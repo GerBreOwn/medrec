@@ -1,0 +1,74 @@
+.
+├── docker-compose.yml
+├── Dockerfile
+├── entrypoint.sh
+├── __init__.py
+├── manage.py
+├── medrec
+│   ├── doctor
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── __init__.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── entrypoint.sh
+│   ├── functions
+│   ├── gunicorn_start.sh
+│   ├── __init__.py
+│   ├── logs
+│   ├── manage.py
+│   ├── patient
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── images
+│   │   │   ├── hospital_92072.zip
+│   │   │   ├── Hospital_Icon_16.png
+│   │   │   ├── Hospital_Icon_32.png
+│   │   │   ├── Hospital_Icon_48.png
+│   │   │   ├── Hospital_Icon_64.png
+│   │   │   ├── Hospital_Icon_72.png
+│   │   │   └── Hospital_Icon_96.png
+│   │   ├── __init__.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── requirements.txt
+│   ├── settings.py
+│   ├── templates
+│   │   └── medrec
+│   ├── urls.py
+│   ├── views.py
+│   ├── visit
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── __init__.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   ├── printing.py
+│   │   ├── testform.pdf
+│   │   ├── test-pdf.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   └── wsgi.py
+├── nginx
+│   ├── Dockerfile
+│   ├── nginx_main_site.conf
+│   └── test.txt
+├── pgbackups
+├── pgdata
+├── postgresql
+│   ├── Dockerfile
+│   └── pg_hba.conf
+├── requirements.txt
+├── settings.py
+├── static
+└── tree.txt
+
+16 directories, 55 files

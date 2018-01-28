@@ -1,9 +1,0 @@
-django
-gunicorn
-psycopg2
-reportlab
-django-crum
-django-versatileimagefield
-python-decouple
-django-postgres-extra
-weasyprint

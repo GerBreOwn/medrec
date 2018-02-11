@@ -6,35 +6,48 @@
 
 version: "3.4"
 services:
-  postgres-bdr:
-     # image: postgres:latest
-    #image: jgiannuzzi/postgres-bdr:latest
-    #image: markrowsoft/postgresql-bdr
-    #image: gerbreown/postgres-bdr:latest
-    image: safenetlabs/postgres-bdr:latest
+  #postgres-bdr:
+     ## image: postgres:latest
+    ##image: jgiannuzzi/postgres-bdr:latest
+    ##image: markrowsoft/postgresql-bdr
+    ##image: gerbreown/postgres-bdr:latest
+    #image: safenetlabs/postgres-bdr:latest
 
-    networks:
-      - medrec_default
+    #networks:
+      #- medrec_default
 
-    environment:
-      - DB_USER=medrec
-      - DB_PASS=medrec123
-      - DB_NAME=medrec
-      - PG_TRUST_LOCALNET=true
-      - REPLICATION_USER=medrec-replicate
-      - REPLICATION_PASS=medrec-replicate@
-      - REPLICATION_SSLMODE=prefered
-    volumes:
-       - pgdata:/var/lib/postgresql/data
-       - pgbackups:/var/lib/postgresql/pgbackups
-    #ports:
-       #- 5432:5432
+    #environment:
+      #- DB_USER=medrec
+      #- DB_PASS=medrec123
+      #- DB_NAME=medrec
+      #- PG_TRUST_LOCALNET=true
+      #- REPLICATION_USER=medrec-replicate
+      #- REPLICATION_PASS=medrec-replicate@
+      #- REPLICATION_SSLMODE=prefered
+    #volumes:
+       #- pgdata:/var/lib/postgresql/data
+       #- pgbackups:/var/lib/postgresql/pgbackups
+    ##ports:
+       ##- 5432:5432
+    #deploy:
+      #mode: replicated
+      #replicas: 4
+      #placement:
+          #constraints: [node.role == manager]
+  db:
+    image: mariadb
     deploy:
       mode: replicated
       replicas: 4
       placement:
           constraints: [node.role == manager]
-
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: dj
+      MYSQL_USER: dj
+      MYSQL_PASSWORD: secret
+    volumes:
+      - db-data:/var/lib/mysql
 
   nginx:
     image: gerbreown/nginx:latest
@@ -59,26 +72,28 @@ services:
       - medrec_default
 
     depends_on:
-       - postgres-bdr
+       - db
 
     deploy:
       mode: replicated
       replicas: 5
       placement:
           constraints: [node.role == manager]
-  web:
-    image: gerbreown/stackdemo
-    ports:
-      - "8000:8000"
-    deploy:
-      mode: replicated
-      replicas: 2
-      placement:
-          constraints:  [node.role == manager]
-  redis:
-    image: redis:alpine
+  #web:
+    #image: gerbreown/stackdemo
+    #ports:
+      #- "8000:8000"
+    #deploy:
+      #mode: replicated
+      #replicas: 2
+      #placement:
+          #constraints:  [node.role == manager]
+  #redis:
+    #image: redis:alpine
 
 volumes:
+  db-data:
+    external: false
   pgdata:
     external: false
   pgbackups:

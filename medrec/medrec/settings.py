@@ -52,9 +52,7 @@ INSTALLED_APPS = [
     'patient',
     'visit',
     'doctor',
-    #'django-versatileimagefield',
-    'django.contrib.postgres',
-    #'django-psqlextra',
+    'django-mysql',
 ]
 
 MIDDLEWARE = [
@@ -100,12 +98,12 @@ WSGI_APPLICATION = 'medrec.wsgi'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'psqlextra.backend',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME':  config('DB_NAME'),
         'USER':  config('DB_USER'),
         'PASSWORD':  config('DB_PASSWORD'),
-        'HOST':  postgres-bdr,
-        'PORT': '5432',
+        'HOST':  db,
+        'PORT': '3306',
     }
 }
 

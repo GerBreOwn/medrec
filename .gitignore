@@ -3,9 +3,6 @@
 __pycache__/
 *.py[cod]
 
-# C extensions
-*.so
-
 # Distribution / packaging
 .Python
 env/
@@ -52,5 +49,5 @@ coverage.xml
 
 # PyBuilder
 target/
-
+tree.txt
 .env

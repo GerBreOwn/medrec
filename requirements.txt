@@ -1,6 +1,6 @@
 django
 gunicorn
-psycopg2
+django-mysql
 reportlab
 django-crum
 django-versatileimagefield

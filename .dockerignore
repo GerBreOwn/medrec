@@ -6,8 +6,8 @@ config.ini
 supervisord.log
 supervisord.pid
 COMMIT_EDITMSG
-Dockerfile
 HEAD
 branches
 *.zip
 *.png
+tree.txt

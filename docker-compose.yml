@@ -66,6 +66,17 @@ services:
       replicas: 5
       placement:
           constraints: [node.role == manager]
+  web:
+    image: gerbreown/stackdemo
+    ports:
+      - "8000:8000"
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+          constraints:  [node.role == manager]
+  redis:
+    image: redis:alpine
 
 volumes:
   pgdata:

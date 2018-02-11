@@ -2,8 +2,9 @@
 ├── docker-compose.yml
 ├── Dockerfile
 ├── entrypoint.sh
-├── __init__.py
-├── manage.py
+├── functions
+├── gmail password
+├── gunicorn_start.sh
 ├── medrec
 │   ├── doctor
 │   │   ├── admin.py
@@ -15,11 +16,14 @@
 │   │   ├── tests.py
 │   │   └── views.py
 │   ├── entrypoint.sh
-│   ├── functions
-│   ├── gunicorn_start.sh
-│   ├── __init__.py
 │   ├── logs
 │   ├── manage.py
+│   ├── medrec
+│   │   ├── __init__.py
+│   │   ├── manage.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
 │   ├── patient
 │   │   ├── admin.py
 │   │   ├── apps.py
@@ -39,36 +43,32 @@
 │   │   ├── urls.py
 │   │   └── views.py
 │   ├── requirements.txt
-│   ├── settings.py
+│   ├── settings
+│   │   └── __init__.py
 │   ├── templates
 │   │   └── medrec
-│   ├── urls.py
-│   ├── views.py
-│   ├── visit
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── forms.py
-│   │   ├── __init__.py
-│   │   ├── migrations
-│   │   ├── models.py
-│   │   ├── printing.py
-│   │   ├── testform.pdf
-│   │   ├── test-pdf.py
-│   │   ├── tests.py
-│   │   └── views.py
-│   └── wsgi.py
+│   └── visit
+│       ├── admin.py
+│       ├── apps.py
+│       ├── forms.py
+│       ├── __init__.py
+│       ├── migrations
+│       ├── models.py
+│       ├── printing.py
+│       ├── testform.pdf
+│       ├── test-pdf.py
+│       ├── tests.py
+│       └── views.py
 ├── nginx
 │   ├── Dockerfile
 │   ├── nginx_main_site.conf
 │   └── test.txt
-├── pgbackups
-├── pgdata
 ├── postgresql
 │   ├── Dockerfile
+│   ├── pgbackups
+│   ├── pgdata
 │   └── pg_hba.conf
-├── requirements.txt
-├── settings.py
 ├── static
 └── tree.txt
 
-16 directories, 55 files
+18 directories, 53 files

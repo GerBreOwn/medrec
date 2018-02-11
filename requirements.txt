@@ -7,3 +7,5 @@ django-versatileimagefield
 python-decouple
 django-postgres-extra
 weasyprint
+flask
+redis

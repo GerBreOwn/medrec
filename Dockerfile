@@ -12,12 +12,12 @@ EXPOSE 8000
 RUN mkdir -p $SRV_PATH && \
          groupadd -g 350 -r -f medrec && \
          useradd -r -m -u 350 -g 350 medrec
-COPY ./medrec/manage.py  $SRV_PATH/manage.py
-COPY ./medrec/requirements.txt  $SRV_PATH/
-RUN pip install -r $SRV_PATH/requirements.txt
 WORKDIR $SRV_PATH
+# COPY ./medrec/manage.py  $SRV_PATH/manage.py/
+# COPY ./medrec/requirements.txt  $SRV_PATH/
+COPY . /$SRV_PATH/
+RUN pip install -r $SRV_PATH/requirements.txt
 #VOLUME $SRV_PATH/external
-COPY ./medrec/ $SRV_PATH/
 VOLUME /var/lib/postgresql/data
 USER medrec
 # ENTRYPOINT ["/entrypoint.sh"]

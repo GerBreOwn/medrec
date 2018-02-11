@@ -24,16 +24,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 if os.getenv('DOCKER_CONTAINER'):
-	POSTGRES_HOST = 'postgres-bdr'
+    POSTGRES_HOST = 'postgres-bdr'
 else:
-	POSTGRES_HOST = '127.0.0.1'
+    POSTGRES_HOST = '127.0.0.1'
 
 if os.getenv('DJANGO_ENV')=='prod':
-	DEBUG = False
-	ALLOWED_HOSTS = ['*']
+    DEBUG = False
+    ALLOWED_HOSTS = ['*']
 else:
-	DEBUG = True
-	ALLOWED_HOSTS = []
+    DEBUG = True
+    ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = config('DEBUG', cast=bool)
 
@@ -43,7 +43,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-	'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -76,7 +76,7 @@ TEMPLATES = [
         'DIRS': [],
         'OPTIONS': {
             'context_processors': [
-				'django.contrib.auth.context_processors.auth',
+                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.template.context_processors.i18n',
@@ -86,11 +86,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'loaders': [
-				'django.template.loaders.filesystem.Loader',
-				'django.template.loaders.app_directories.Loader',
-			#	'admin_tools.template_loaders.Loader'
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            #   'admin_tools.template_loaders.Loader'
 
-			]
+            ]
         },
     },
 ]
@@ -99,8 +99,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'medrec.wsgi'
 
 DATABASES = {
-	'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg',
+    'default': {
         'ENGINE': 'psqlextra.backend',
         'NAME':  config('DB_NAME'),
         'USER':  config('DB_USER'),
@@ -112,7 +111,7 @@ DATABASES = {
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-	{
+    {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {

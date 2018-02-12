@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-from decouple import config, Csv
+# from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'bh3d6hbia1l3w@qkcix!5$gj2b2(%1_$%tv%0l(&gpr66p-g)w'
 
 if os.getenv('DOCKER_CONTAINER'):
     POSTGRES_HOST = 'postgres-bdr'
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'visit',
     'doctor',
     'django-mysql',
+    'django_counter_field_py3',
 ]
 
 MIDDLEWARE = [
@@ -99,10 +100,10 @@ WSGI_APPLICATION = 'medrec.wsgi'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':  config('DB_NAME'),
-        'USER':  config('DB_USER'),
-        'PASSWORD':  config('DB_PASSWORD'),
-        'HOST':  db,
+        'NAME':  'medrec',
+        'USER':  'medrec',
+        'PASSWORD':  'M3dR3c!',
+        'HOST':  'db',
         'PORT': '3306',
     }
 }

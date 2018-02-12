@@ -67,7 +67,7 @@ services:
 
 
   medrec:
-    image: gerbreown/medrec:08
+    image: gerbreown/medrec:09
     networks:
       - medrec_default
 

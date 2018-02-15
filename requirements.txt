@@ -1,12 +1,11 @@
 django
 gunicorn
-django-mysql
+mysqlclient
 django-counter-field-py3
 reportlab
 django-crum
 django-versatileimagefield
 python-decouple
-#django-postgres-extra
 weasyprint
 #flask
 #redis

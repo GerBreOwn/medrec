@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'patient',
     'visit',
     'doctor',
-    'django-mysql',
     'django_counter_field_py3',
+    'django-mysql',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +103,7 @@ DATABASES = {
         'NAME':  'medrec',
         'USER':  'medrec',
         'PASSWORD':  'M3dR3c!',
-        'HOST':  'db',
+        'HOST':  '127.0.0.1',
         'PORT': '3306',
     }
 }

@@ -11,3 +11,6 @@ branches
 *.zip
 *.png
 tree.txt
+Dockerfile
+docker-compose.yml
+/nginx

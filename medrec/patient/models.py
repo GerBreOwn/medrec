@@ -12,7 +12,6 @@ from versatileimagefield.fields import VersatileImageField
 from django_counter_field_py3 import CounterField
 
 class CommonInfo(models.Model):
-    objects = PostgresManager()
     is_active = models.BooleanField(default = True, editable = False)
     created_on = models.DateTimeField(auto_now_add = True, editable = False)
     created_by = models.ForeignKey('auth.User', blank=True, null=True, editable = False, default = None, on_delete=models.SET_DEFAULT, related_name = "+")

@@ -10,18 +10,16 @@ MAINTAINER Gerald S. Brown <gbrown@gerbreown.com>
 #RUN mkdir -p $SRV_PATH && \
          #groupadd -g 350 -r -f medrec && \
          #useradd -r -m -u 350 -g 350 medrec
+RUN apt-get install -y python3-dev libmysqlclient-dev
 
-# COPY ./medrec/manage.py  $SRV_PATH/manage.py/
-# COPY ./medrec/requirements.txt  $SRV_PATH/
 WORKDIR /medrec
 RUN mkdir static logs
 #RUN rm -r /srv/www/html/external
 COPY . /medrec
 #RUN pip install -r $SRV_PATH/requirements.txt
+RUN pip install mysqlclient
 RUN pip install -r requirements.txt
 EXPOSE 8000
-#VOLUME /var/lib/postgresql/data
-#USER medrec
-# ENTRYPOINT ["/entrypoint.sh"]
+#CMD ["python3", "./medrec/manage.py", "runserver", "0.0.0.0:8000"]
 CMD ["python3", "./medrec/manage.py", "runserver", "0.0.0.0:8000"]
 

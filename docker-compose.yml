@@ -34,7 +34,7 @@ services:
       #replicas: 4
       #placement:
           #constraints: [node.role == manager]
-  db:
+  mariadb:
     image: mariadb
     deploy:
       mode: replicated
@@ -72,7 +72,7 @@ services:
       - medrec_default
 
     depends_on:
-       - db
+       - mariadb
 
     deploy:
       mode: replicated

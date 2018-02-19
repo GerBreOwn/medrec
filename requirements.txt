@@ -7,5 +7,6 @@ django-crum
 django-versatileimagefield
 python-decouple
 weasyprint
+nano
 #flask
 #redis

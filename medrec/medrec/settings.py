@@ -23,17 +23,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'bh3d6hbia1l3w@qkcix!5$gj2b2(%1_$%tv%0l(&gpr66p-g)w'
 
-if os.getenv('DOCKER_CONTAINER'):
-    POSTGRES_HOST = 'postgres-bdr'
-else:
-    POSTGRES_HOST = '127.0.0.1'
+ALLOWED_HOSTS = ['medrec']
+#if os.getenv('DOCKER_CONTAINER'):
+    #POSTGRES_HOST = 'postgres-bdr'
+#else:
+    #POSTGRES_HOST = '127.0.0.1'
 
-if os.getenv('DJANGO_ENV')=='prod':
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
+#if os.getenv('DJANGO_ENV')=='prod':
+    #DEBUG = False
+    #ALLOWED_HOSTS = []
+#else:
+    #DEBUG = True
+    #ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = config('DEBUG', cast=bool)
 
@@ -53,7 +54,6 @@ INSTALLED_APPS = [
     'visit',
     'doctor',
     'django_counter_field_py3',
-    'mysql-connector-python',
 ]
 
 MIDDLEWARE = [
@@ -95,14 +95,14 @@ TEMPLATES = [
 ]
 
 # WSGI_APPLICATION = 'medrec.wsgi:application'
-WSGI_APPLICATION = 'medrec.wsgi'
+WSGI_APPLICATION = 'medrec.wsgi.application'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  'medrec',
-        'USER':  'root',
-        'PASSWORD':  'M3dR3c!',
+        'USER':  'medrec',
+        'PASSWORD':  'CasC#373',
         'HOST':  'mariadb',
         'PORT': '3306',
     }
